@@ -1,0 +1,16 @@
+
+  @Bean
+  public ServletRegistrationBean messageDispatcherServlet(ApplicationContext applicationContext) {
+    final MessageDispatcherServlet servlet = new MessageDispatcherServlet();
+    servlet.setApplicationContext(applicationContext);
+    servlet.setTransformWsdlLocations(true);
+    return new ServletRegistrationBean(servlet, "/SvcImpl/common/MX/channels/v3_0_MX_0/SOAPEndpoint/ChannelsService.serviceagent/OpEndpointHTTP/*");
+  }
+
+  @Bean(name = "ChannelImpl_v3_0_MX_0")
+  public Wsdl11Definition wsdl11Definition() {
+
+    final SimpleWsdl11Definition simpleWsdl11Definition = new SimpleWsdl11Definition();
+    simpleWsdl11Definition.setWsdl(new ClassPathResource("/wsdl/ChannelImpl_v3_0_MX_0.wsdl"));
+    return simpleWsdl11Definition;
+  }
